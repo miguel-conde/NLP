@@ -87,7 +87,16 @@ for (i in 1:length(ticker)){
 }
 
 ### FUTURO
-library(openNLP)
+# library(openNLP)
+pacman::p_load(openNLP)
+if(!pacman::p_isinstalled(openNLPmodels.en)) {
+install.packages("openNLPmodels.en", 
+                 repos = "http://datacube.wu.ac.at/", type = "source")
+}
+if(!pacman::p_isinstalled(openNLPmodels.es)) {
+  install.packages("openNLPmodels.es", 
+                   repos = "http://datacube.wu.ac.at/", type = "source")
+}
 
 s <- as.String('Santander bank plans to slash up to 1,200 jobs across Spain')
 
@@ -101,3 +110,4 @@ p <- parse_annotator(s, a2)
 ptext <- sapply(p$features, `[[`, "parse")
 ptext
 Tree_parse(ptext)
+
